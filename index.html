@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document t</title>
+
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    
+    <!-- (Optional) Use CSS or JS implementation -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+        integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        nav{
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+       .logo{}
+       nav ul{
+        list-style: none;
+            display: none;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+       }
+
+       .sec1{
+        display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            animation: hotel 7s linear  alternate infinite;
+        width: 100%;
+        height: 700px;
+        background-repeat: no-repeat;
+           
+            
+            
+       }
+       @keyframes hotel {
+           0%{
+        background:url('https://th.bing.com/th?id=OIP.oetnNwsceeQQo36_Qz27MQHaE8&w=306&h=204&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.3&pid=3.1&rm=2');
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+
+           }
+           40%{
+        background:url('https://th.bing.com/th?id=OIP.QONnfLxMWp9_84B-ld7pQQHaE8&w=306&h=204&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.3&pid=3.1&rm=2');
+        background-repeat: no-repeat;
+        background-size: cover;
+
+           }
+           80%{
+        background:url('https://th.bing.com/th/id/OIP.R6Y1yAxnp-z9WLbjv0ph-AHaE8?w=286&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7') ;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+           }
+           100%{
+        background:url('https://th.bing.com/th/id/OIP.LAKlyp7D03xGufDu_LE6mAHaE8?w=271&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7') ;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+           }}
+       
+
+       .sec1 img{
+        width: 300px;
+       }
+       .sec2{
+        display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+
+       }
+
+       .sec2 img{
+        width: 300px;
+        transition: all .5s linear;
+       animation: phone 2s linear infinite alternate;
+        } 
+    
+    @keyframes phone {
+        from{
+            transform: translateX(0);
+
+        }
+        to{
+            transform: translateX(150px);
+
+        }
+       }
+
+
+       button{
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+       }
+
+       .sec2Heading{
+        margin-top: 50px;
+        text-align: center;
+        font-family: sans-serif;
+       }
+
+       .empty{
+        width: 300px;
+        height: 4px;
+        background-color: yellow;
+        margin: auto;
+        border-radius: 50%;
+       }
+
+.sec3{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    gap:20px;
+    flex-wrap: wrap;
+}
+       .sec3Images{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        opacity: .5;
+        transition: .2s all linear;
+
+       }
+       .sec3Images:hover{
+        opacity: 1;
+       }
+
+       .sec4{
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 20px;
+        
+       }
+       .card{
+        width: 700px;
+        height: auto;
+        background-color: lightblue;
+        padding: 10px;
+        border-radius: 10px;
+       }
+       .card img{
+        width: 100%;
+        height: auto;
+       }
+.sec5{
+    width: 400px;
+    margin: 20px auto;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #333;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+ 
+}
+input{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 10px;
+    background-color: lightblue;
+}
+
+
+footer{
+    display: flex;
+   justify-content: space-around;
+    gap: 50px;
+ 
+
+}
+
+.footer{
+    padding: 20px 10px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    width: 100%;
+
+}
+footer ul{
+    list-style: none;
+}
+
+footer p{
+    width: 200px;
+}
+       @media only screen and (min-width: 768px) {
+       nav ul{
+            display: flex;
+        }
+        .bar{
+            display: none;
+        }
+
+        .sec1{
+            gap: 20px;
+            flex-direction: row;
+        }
+        .sec2{
+            gap: 20px;
+            flex-direction: row;
+        }
+        
+       }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Logo</div>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Services</li>
+            <li>Project</li>
+        </ul>
+
+        <div class="bar">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- ========== Start Section-1 ========== -->
+    
+
+    <div class="sec1">
+        <div class="sec1Text">
+
+        
+            <h1>CRAVE FOR SOMETHIMG SWEET AND SPICY?</h1>
+            <p>VISIT US NOW</p>
+
+            <button>Know more </button>
+        </div>
+    </div>
+    <!-- ========== End Section-1 ========== -->
+    
+
+
+    <!-- ========== Start Section-2 ========== -->
+
+    <h1 class="sec2Heading">ABOUT OUR FOOD</h1>
+    <div class="empty"></div>
+    <div class="sec2">
+      
+        <div class="sec2Text">
+            <h2>We pride ourselves on making real food from the best ingredients.</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus consequatur voluptas modi quidem consectetur omnis quos deleniti porro, sequi illo voluptatibus! Quia commodi qui sapiente maxime consequuntur consectetur odio.</p>
+            
+        </div>
+
+
+        <img src="https://ganeshdutt100.github.io/Foodies-G.D/img-1.png"alt="">
+    </div>
+    <!-- ========== End Section-2 ========== -->
+
+
+
+    <h1 class="sec2Heading">WE PRESENT TASTIEST FOOD</h1>
+    <div class="empty"></div>
+
+    <div class="sec3">
+        <span>
+        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-3.jpg" alt="">
+        <p>Rainbow Vegetable Sandwich<br>
+            price:$10.50 $11.70</p>
+
+        </span>
+        <span>
+        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-4.jpg" alt="">
+        <p>Vegetarian Burger<br>
+           price: $10.50 $11.70</p>
+        </span>
+        <span>
+        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-5.jpg" alt="">
+        <p>Raspberry Stuffed French Toast
+            <br>
+            price:$10.50 $11.70
+        </p>
+        </span>
+    </div>
+
+
+    <!-- ========== Start Section-4 ========== -->
+    
+    <h1 class="sec2Heading">BUMPER DISCOUNT THIS FESTIVE SEASON</h1>
+    <div class="empty"></div>
+   
+    
+    <div class="sec4">
+      <div class="card">
+        <img src="https://cdn.pixabay.com/photo/2014/07/08/12/34/pizza-386717_1280.jpg" alt="">
+        <div class="cardText">
+            <h2>GET 40% OFF THIS FESTIVE SEASON</h2>
+            <p>GET UPTO 40% OFF ON ORDERS ABOVE Rs.1999</p>
+          <button>order now</button>
+      </div>
+
+        
+      
+    </div>
+    </div>
+     <!-- ========== End Section-4 ========== -->
+
+
+
+     <!-- ========== Start -5 ========== -->
+      
+     <h1 style="margin-top: 50px;" class="sec2Heading">JOIN PREMIMUM MEMBERSHIP</h1>
+     <div class="empty"></div>
+      <div class="sec5" >
+
+        <form action="">
+            <input type="text" placeholder="Enter Your Name">
+            <input type="number" placeholder="Phone Number ">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="password">
+            <input type="submit" placeholder="proceed to pay">
+        </form>
+      </div>
+     <!-- ========== End -5 ========== -->
+     
+<div class="footer">
+     <footer>
+       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias corporis odit suscipit dolore necessitatibus tempore placeat </p>
+
+       <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>contact</li>
+       </ul>
+
+       <form >
+         <input type="text" placeholder="Enter Your Email">
+         <button style="background-color: orange;">Subscribe</button>
+       </form>
+        
+     </footer>
+     <p>&copy; 2023 All rights reserved.</p>
+
+    </div>
+</body>
+</html>
