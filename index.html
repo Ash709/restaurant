@@ -17,12 +17,7 @@
         integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
-        const bar = document.querySelector('.bar');
-        const navList = document.querySelector('nav ul');
-
-  bar.addEventListener('click', () => {
-    // Toggle the 'active' class on the <ul>
-    navList.classList.toggle('show');
+        
   });
     ></script>
     
@@ -46,6 +41,16 @@
             justify-content: space-around;
             gap: 20px;
        }
+        nav ul.show {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 10px;
+}
 
        .sec1{
         display: flex;
@@ -378,7 +383,16 @@ footer p{
             <a href="#"><i class="fa-brands fa-twitter"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
      <p>&copy; 2023 All rights reserved.</p>
-
     </div>
+    <script>
+  const bar = document.querySelector('.bar');
+  const navList = document.querySelector('nav ul');
+
+  bar.addEventListener('click', () => {
+    navList.classList.toggle('show');
+  });
+</script>
+
+    
 </body>
 </html>
