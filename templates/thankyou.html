@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .thankyou {
+      text-align: center;
+      padding: 100px;
+      font-family: sans-serif;
+    }
+    .thankyou h1 {
+      color: green;
+    }
+    .thankyou a {
+      margin-top: 20px;
+      display: inline-block;
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou">
+    <h1>Thank you for your booking!</h1>
+    <p>We've received your reservation and will contact you soon.</p>
+    <a href="/">Back to Home</a>
+  </div>
+</body>
+</html>
