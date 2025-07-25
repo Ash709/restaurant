@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document t</title>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<img src="{{ url_for('static', filename='images/dish1.jpg') }}">
+
     
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
@@ -22,6 +19,10 @@
     ></script>
     
     <style>
+        html {
+  scroll-behavior: smooth;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -61,6 +62,17 @@
   border-radius: 10px;
   box-sizing: border-box;
 }
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: yellow;
+}
+
 
        .sec1{
         display: flex;
@@ -281,25 +293,21 @@ footer p{
 </head>
 <body>
     <nav>
-        <div class="logo">
-            TASTYNUTS
-        </div>
-        <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-            <li>Services</li>
-            <li>Project</li>
-        </ul>
+  <div class="logo">TASTYNUTS</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#offers">Offers</a></li>
+    <li><a href="#book">Book</a></li>
+    
+  </ul>
+</nav>
 
-        <div class="bar">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-    </nav>
 
     
 
-    <div class="sec1">
+    <div class="sec1" id="home">
         <div class="sec1Text">
 
         
@@ -317,7 +325,7 @@ footer p{
 
     <h1 class="sec2Heading">ABOUT OUR FOOD</h1>
     <div class="empty"></div>
-    <div class="sec2">
+    <div class="sec2" id="about">
       
         <div class="sec2Text">
             <h2>We pride ourselves on making real food from the best ingredients.</h2>
@@ -326,7 +334,7 @@ footer p{
         </div>
 
 
-        <img src="https://ganeshdutt100.github.io/Foodies-G.D/img-1.png"alt="Vegetarian Burger">
+        <img src="{{ url_for('static', filename='images/MEAL.png') }}" alt="Meal">
     </div>
     
 
@@ -335,20 +343,20 @@ footer p{
     <h1 class="sec2Heading">WE PRESENT TASTIEST FOOD</h1>
     <div class="empty"></div>
 
-    <div class="sec3">
+    <div class="sec3"id="menu">
         <span>
-        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-3.jpg" alt="">
+<img class="sec3Images" src="{{ url_for('static', filename='images/sandwich.jpg') }}" alt="Sandwich">
         <p>Rainbow Vegetable Sandwich<br>
             price:$10.50 $11.70</p>
 
         </span>
         <span>
-        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-4.jpg" alt="">
+        <img class="sec3Images" src="{{ url_for('static', filename='images/Burger.jpg') }}" alt="Burger">
         <p>Vegetarian Burger<br>
            price: $10.50 $11.70</p>
         </span>
         <span>
-        <img class="sec3Images" src="https://ganeshdutt100.github.io/Foodies-G.D/img-5.jpg" alt="">
+        <img class="sec3Images" src="{{ url_for('static', filename='images/French toast.jpg') }}" alt="French Toast">
         <p>Raspberry Stuffed French Toast
             <br>
             price:$10.50 $11.70
@@ -363,9 +371,10 @@ footer p{
     <div class="empty"></div>
    
     
-    <div class="sec4">
+    <div class="sec4" id="offers">
       <div class="card">
-        <img src="https://cdn.pixabay.com/photo/2014/07/08/12/34/pizza-386717_1280.jpg" alt="">
+        <img src="{{ url_for('static', filename='images/pizza.jpg') }}" alt="Pizza">
+
         <div class="cardText">
             <h2>GET 40% OFF THIS FESTIVE SEASON</h2>
             <p>GET UPTO 40% OFF ON ORDERS ABOVE Rs.1999</p>
@@ -380,15 +389,19 @@ footer p{
       
      <h1 style="margin-top: 50px;" class="sec2Heading">JOIN PREMIMUM MEMBERSHIP</h1>
      <div class="empty"></div>
-      <div class="sec5" >
+      <div class="sec5" id="book">
 
-        <form action="">
-            <input type="text" placeholder="Enter Your Name">
-            <input type="number" placeholder="Phone Number ">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="password">
-            <input type="submit" value="proceed to pay">
-        </form>
+       <form action="/book" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <input type="date" name="date" required>
+  <input type="time" name="time" required>
+  <input type="number" name="guests" placeholder="Number of Guests" required>
+  <button type="submit">Book Table</button>
+</form>
+
+
+
       </div>
     
      
