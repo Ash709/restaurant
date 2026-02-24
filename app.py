@@ -17,16 +17,22 @@ def book():
         date = request.form["date"]
         time = request.form["time"]
         guests = request.form["guests"]
+       
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    
+        query = """
+        INSERT INTO bookings (name, phone, date, time, guests)
+        VALUES (%s, %s, %s, %s, %s)
+        """
 
-        
+        cursor.execute(query, (name, phone, date, time, guests))
+        conn.commit()
+
+        cursor.close()
+        conn.close()
 
         return render_template("thankyou.html")
 
     except Exception as e:
         return f"Something went wrong: {e}", 500
-import os
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
