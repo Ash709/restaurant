@@ -7,5 +7,5 @@ def get_db_connection():
         user="root",
         password="ASH@1234562003",
         database="tastynuts",
-        auth_plugin='mysql_native_password'
+        
     )
