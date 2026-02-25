@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from db_config import get_db_connection
-from mysql.connector import Error
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/book", methods=["POST"])
 def book():
@@ -17,27 +18,13 @@ def book():
         time = request.form["time"]
         guests = request.form["guests"]
 
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        query = """
-        INSERT INTO bookings (name, phone, date, time, guests)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-        cursor.execute(query, (name, phone, date, time, guests))
-        conn.commit()
-
-        cursor.close()
-        conn.close()
+        
 
         return render_template("thankyou.html")
 
-    except Error as e:
-        # MySQL errors
-        return f"MySQL Error: {str(e)}", 500
     except Exception as e:
-        # Any other Python errors
-        return f"Unexpected Error: {str(e)}", 500
+        return f"Something went wrong: {e}", 500
+import os
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000))) 
