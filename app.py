@@ -1,7 +1,21 @@
 from flask import Flask, render_template, request
 from db_config import get_db_connection
 
-app = Flask(__name__)  
+app = Flask(__name__)
+
+conn = get_db_connection()
+conn.execute("""
+CREATE TABLE IF NOT EXISTS bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    phone TEXT,
+    date TEXT,
+    time TEXT,
+    guests TEXT
+)
+""")
+conn.commit()
+conn.close()
 
 
 @app.route("/")
