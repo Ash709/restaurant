@@ -25,7 +25,13 @@ def book():
         VALUES (%s, %s, %s, %s, %s)
         """
 
-     
+        cursor.execute(query, (name, phone, date, time, guests))
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+
      
         return render_template("thankyou.html")
 
