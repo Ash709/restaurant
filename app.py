@@ -22,7 +22,7 @@ def book():
 
     query = """
     INSERT INTO bookings (name, phone, date, time, guests)
-    VALUES (%s, %s, %s, %s, %s)
+    VALUES (?, ?, ?, ?, ?)
     """
 
     cursor.execute(query, (name, phone, date, time, guests))
