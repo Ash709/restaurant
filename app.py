@@ -32,4 +32,5 @@ def book():
         return render_template("thankyou.html")
 
     except Exception as e:
-        return f"Something went wrong: {e}", 500
+        # Use str(e), NOT e.msg
+        return f"Something went wrong: {str(e)}", 500
