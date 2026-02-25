@@ -18,12 +18,19 @@ def book():
         time = request.form["time"]
         guests = request.form["guests"]
 
+         query = """
+    INSERT INTO bookings (name, phone, date, time, guests)
+    VALUES (%s, %s, %s, %s, %s)
+    """
 
-        query = """
-INSERT INTO bookings (name, phone, date, time, guests)
-VALUES (%s, %s, %s, %s, %s)
-"""
+    cursor.execute(query, (name, phone, date, time, guests))
+    conn.commit()
 
+    cursor.close()
+    conn.close()
+
+
+     
 
         
 
