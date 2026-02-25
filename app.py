@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from db_config import get_db_connection 
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 
 @app.route("/book", methods=["POST"])
@@ -28,6 +31,5 @@ def book():
         conn.close()
 
         return render_template("thankyou.html")
-
-    except Exception as e:
-        return f"Something went wrong: {e}", 500
+if __name__ == "__main__":
+    app.run(debug=True)
