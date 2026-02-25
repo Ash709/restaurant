@@ -11,7 +11,6 @@ def home():
 
 @app.route("/book", methods=["POST"])
 def book():
-     print("BOOK ROUTE HIT")
     try:
         name = request.form["name"]
         phone = request.form["phone"]
