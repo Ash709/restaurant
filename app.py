@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from db_config import get_db_connection
 
-app = Flask(__name__)
+app = Flask(__name__)  
 
 
 @app.route("/")
@@ -11,28 +11,28 @@ def home():
 
 @app.route("/book", methods=["POST"])
 def book():
-    try:
-        name = request.form["name"]
-        phone = request.form["phone"]
-        date = request.form["date"]
-        time = request.form["time"]
-        guests = request.form["guests"]
-       
-        conn = get_db_connection()
-        cursor = conn.cursor()
+    name = request.form["name"]
+    phone = request.form["phone"]
+    date = request.form["date"]
+    time = request.form["time"]
+    guests = request.form["guests"]
 
-        query = """
-        INSERT INTO bookings (name, phone, date, time, guests)
-        VALUES (%s, %s, %s, %s, %s)
-        """
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-        cursor.execute(query, (name, phone, date, time, guests))
-        conn.commit()
+    query = """
+    INSERT INTO bookings (name, phone, date, time, guests)
+    VALUES (%s, %s, %s, %s, %s)
+    """
 
-        cursor.close()
-        conn.close()
+    cursor.execute(query, (name, phone, date, time, guests))
+    conn.commit()
 
-        return render_template("thankyou.html")
+    cursor.close()
+    conn.close()
 
-    except Exception as e:
-        return f"Something went wrong: {e}", 500
+    return render_template("thankyou.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
