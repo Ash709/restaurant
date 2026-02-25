@@ -6,6 +6,7 @@ try:
         user="root",
         password="ASH@1234562003",
         database="tastynuts"
+         port=3306
     )
     print("Connected successfully!")
     conn.close()
