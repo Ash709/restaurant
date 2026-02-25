@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
-from db_config import get_db_connection 
+from flask import Flask, render_template, request, redirect
+from db_config import get_db_connection
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def home():
@@ -17,19 +18,13 @@ def book():
         time = request.form["time"]
         guests = request.form["guests"]
 
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        query = """
-        INSERT INTO bookings (name, phone, date, time, guests)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-        cursor.execute(query, (name, phone, date, time, guests))
-
-        conn.commit()
-        cursor.close()
-        conn.close()
+        
 
         return render_template("thankyou.html")
+
+    except Exception as e:
+        return f"Something went wrong: {e}", 500
+import os
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000))) this is where connection happpens?
