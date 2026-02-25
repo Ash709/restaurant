@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from db_config import get_db_connection
+from mysql.connector import Error
 
 app = Flask(__name__)
 
@@ -31,6 +32,12 @@ def book():
 
         return render_template("thankyou.html")
 
+    except Error as e:
+        # MySQL errors
+        return f"MySQL Error: {str(e)}", 500
     except Exception as e:
-        # Use str(e), NOT e.msg
-        return f"Something went wrong: {str(e)}", 500
+        # Any other Python errors
+        return f"Unexpected Error: {str(e)}", 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
