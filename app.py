@@ -33,6 +33,3 @@ def book():
 
     except Exception as e:
         return f"Something went wrong: {e}", 500
-
-if __name__ == "__main__":
-    app.run(debug=True)
