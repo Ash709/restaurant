@@ -8,7 +8,6 @@ def home():
     return render_template("index.html")
 
 
-
 @app.route("/book", methods=["POST"])
 def book():
     try:
@@ -18,22 +17,21 @@ def book():
         time = request.form["time"]
         guests = request.form["guests"]
 
-         query = """
-    INSERT INTO bookings (name, phone, date, time, guests)
-    VALUES (%s, %s, %s, %s, %s)
-    """
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    cursor.execute(query, (name, phone, date, time, guests))
-    conn.commit()
+        query = """
+        INSERT INTO bookings (name, phone, date, time, guests)
+        VALUES (%s, %s, %s, %s, %s)
+        """
 
-    cursor.close()
-    conn.close()
+        cursor.execute(query, (name, phone, date, time, guests))
+        conn.commit()
 
+        cursor.close()
+        conn.close()
 
      
-
-        
-
         return render_template("thankyou.html")
 
     except Exception as e:
