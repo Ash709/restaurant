@@ -1,9 +1,13 @@
 import mysql.connector
 
-def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",       
+try:
+    conn = mysql.connector.connect(
+        host="127.0.0.1",
+        user="root",
         password="ASH@1234562003",
-        database="tastynuts"        
+        database="tastynuts"
     )
+    print("Connected successfully!")
+    conn.close()
+except Exception as e:
+    print("Connection failed:", e)
