@@ -1,34 +1,29 @@
 from flask import Flask, render_template, request
 import mysql.connector
-import time
 
 app = Flask(__name__)
 
-# Database connection function
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             port=3306,
             user="root",
             password="ASH@1234562003",
-            database="tastynuts",
-            auth_plugin='mysql_native_password',
-            connection_timeout=5
+            database="tastynuts"
         )
         return conn
+
     except mysql.connector.Error as err:
         print("MySQL Connection Error:", err)
         return None
 
 
-# Home Page
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# Booking Route
 @app.route("/book", methods=["POST"])
 def book():
     name = request.form["name"]
@@ -40,7 +35,7 @@ def book():
     conn = get_db_connection()
 
     if conn is None:
-        return "Database connection failed. Please try again later."
+        return "Database connection failed."
 
     try:
         cursor = conn.cursor()
@@ -62,6 +57,5 @@ def book():
         return f"MySQL Error: {err}"
 
 
-# Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
