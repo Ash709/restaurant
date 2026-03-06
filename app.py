@@ -4,19 +4,15 @@ from mysql.connector import Error
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
 @app.route("/book", methods=["POST"])
 def book():
-    try:
-        name = request.form["name"]
-        phone = request.form["phone"]
-        date = request.form["date"]
-        time = request.form["time"]
-        guests = request.form["guests"]
+    name = request.form["name"]
+    phone = request.form["phone"]
+    date = request.form["date"]
+    time = request.form["time"]
+    guests = request.form["guests"]
 
+    try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
@@ -24,20 +20,17 @@ def book():
         INSERT INTO bookings (name, phone, date, time, guests)
         VALUES (%s, %s, %s, %s, %s)
         """
+
         cursor.execute(query, (name, phone, date, time, guests))
         conn.commit()
 
         cursor.close()
         conn.close()
 
-        return render_template("thankyou.html")
+        print("Booking saved successfully")
 
-    except Error as e:
-        # CORRECT: use str(e), never e.msg
-        return f"MySQL Error: {str(e)}", 500
     except Exception as e:
-        # CORRECT: use str(e)
-        return f"Unexpected Error: {str(e)}", 500
+        print("Database connection failed:", e)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    
+    return render_template("thankyou.html")
