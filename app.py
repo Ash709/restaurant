@@ -1,52 +1,56 @@
 from flask import Flask, render_template, request
-from mysql.connector import connect, Error
-from db_config import DB_CONFIG, SOCKET_PATH  # we'll define these in db_config.py
+import mysql.connector
+import time
 
 app = Flask(__name__)
 
-def get_db_connection_safe():
-    """Try TCP connection first, fallback to Unix socket if TCP fails."""
+# Database connection function
+def get_db_connection():
     try:
-        return connect(
-            host=DB_CONFIG["host"],
-            user=DB_CONFIG["user"],
-            password=DB_CONFIG["password"],
-            database=DB_CONFIG["database"],
-            port=DB_CONFIG.get("port", 3306)
+        conn = mysql.connector.connect(
+            host="127.0.0.1",
+            port=3306,
+            user="root",
+            password="ASH@1234562003",
+            database="tastynuts",
+            auth_plugin='mysql_native_password',
+            connection_timeout=5
         )
-    except Error as e:
-        if e.errno == 2003:  # Can't connect to MySQL server
-            # fallback to Unix socket
-            return connect(
-                user=DB_CONFIG["user"],
-                password=DB_CONFIG["password"],
-                database=DB_CONFIG["database"],
-                unix_socket=SOCKET_PATH
-            )
-        else:
-            raise
+        return conn
+    except mysql.connector.Error as err:
+        print("MySQL Connection Error:", err)
+        return None
 
+
+# Home Page
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
+# Booking Route
 @app.route("/book", methods=["POST"])
 def book():
-    try:
-        name = request.form["name"]
-        phone = request.form["phone"]
-        date = request.form["date"]
-        time = request.form["time"]
-        guests = request.form["guests"]
+    name = request.form["name"]
+    phone = request.form["phone"]
+    date = request.form["date"]
+    time_slot = request.form["time"]
+    guests = request.form["guests"]
 
-        conn = get_db_connection_safe()
+    conn = get_db_connection()
+
+    if conn is None:
+        return "Database connection failed. Please try again later."
+
+    try:
         cursor = conn.cursor()
 
         query = """
         INSERT INTO bookings (name, phone, date, time, guests)
         VALUES (%s, %s, %s, %s, %s)
         """
-        cursor.execute(query, (name, phone, date, time, guests))
+
+        cursor.execute(query, (name, phone, date, time_slot, guests))
         conn.commit()
 
         cursor.close()
@@ -54,10 +58,10 @@ def book():
 
         return render_template("thankyou.html")
 
-    except Error as e:
-        return f"MySQL Error: {str(e)}", 500
-    except Exception as e:
-        return f"Unexpected Error: {str(e)}", 500
+    except mysql.connector.Error as err:
+        return f"MySQL Error: {err}"
 
+
+# Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
