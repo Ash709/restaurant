@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Thank You</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
   <style>
     .thankyou {
       text-align: center;
       padding: 100px;
       font-family: sans-serif;
     }
+
     .thankyou h1 {
       color: green;
     }
-    .thankyou a {
+
+    .btn {
       margin-top: 20px;
       display: inline-block;
       background-color: #333;
@@ -24,11 +33,28 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="thankyou">
-    <h1>Thank you for your booking!</h1>
-    <p>We've received your reservation and will contact you soon.</p>
-    <a href="/">Back to Home</a>
-  </div>
+
+  <!-- React root -->
+  <div id="root"></div>
+
+  <!-- React Component -->
+  <script type="text/babel">
+
+    function ThankYou() {
+      return (
+        <div className="thankyou">
+          <h1>Thank you for your booking!</h1>
+          <p>We've received your reservation and will contact you soon.</p>
+          <a href="/" className="btn">Back to Home</a>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<ThankYou />);
+
+  </script>
+
 </body>
 </html>
