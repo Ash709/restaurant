@@ -7,7 +7,7 @@ def get_db_connection():
             user="root",
             password="ASH@1234562003",
             database="tastynuts",
-            
+            port=3306
         )
         return conn
 
