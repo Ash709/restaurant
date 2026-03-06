@@ -32,12 +32,11 @@ def book():
     except Exception as e:
         print("Database connection failed:", e)
 
-    # Always show thank you page
+
     return render_template("thankyou.html")
     except mysql.connector.Error as err:
         return f"MySQL Error: {err}"
 
 
-# Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
