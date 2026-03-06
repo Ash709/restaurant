@@ -16,7 +16,7 @@ def get_db_connection():
         auth_plugin='mysql_native_password',
         connection_timeout=5
 )
-        )
+    
         return conn
     except mysql.connector.Error as err:
         print("MySQL Connection Error:", err)
