@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import mysql.connector
+import time
 
 app = Flask(__name__)
 
@@ -12,61 +13,55 @@ def get_db_connection():
             user="root",
             password="ASH@1234562003",
             database="tastynuts",
-            auth_plugin='mysql_native_password'
+            auth_plugin='mysql_native_password',
+            connection_timeout=5
         )
         return conn
-    except Exception as e:
-        print("MySQL Connection Failed:", e)
+    except mysql.connector.Error as err:
+        print("MySQL Connection Error:", err)
         return None
 
 
 # Home Page
-@app.route('/')
+@app.route("/")
 def home():
     return render_template("index.html")
 
 
 # Booking Route
-@app.route('/book', methods=['POST'])
-def book_table():
-    
-    name = request.form['name']
-    phone = request.form['phone']
-    date = request.form['date']
-    time = request.form['time']
-    guests = request.form['guests']
+@app.route("/book", methods=["POST"])
+def book():
+    name = request.form["name"]
+    phone = request.form["phone"]
+    date = request.form["date"]
+    time_slot = request.form["time"]
+    guests = request.form["guests"]
 
     conn = get_db_connection()
 
-    # If database works
-    if conn:
-        try:
-            cursor = conn.cursor()
+    if conn is None:
+        return "Database connection failed. Please try again later."
 
-            query = """
-            INSERT INTO bookings (name, phone, date, time, guests)
-            VALUES (%s, %s, %s, %s, %s)
-            """
+    try:
+        cursor = conn.cursor()
 
-            cursor.execute(query, (name, phone, date, time, guests))
-            conn.commit()
+        query = """
+        INSERT INTO bookings (name, phone, date, time, guests)
+        VALUES (%s, %s, %s, %s, %s)
+        """
 
-            cursor.close()
-            conn.close()
+        cursor.execute(query, (name, phone, date, time_slot, guests))
+        conn.commit()
 
-            print("Booking saved to MySQL")
+        cursor.close()
+        conn.close()
 
-        except Exception as e:
-            print("Database Insert Failed:", e)
+        return render_template("thankyou.html")
 
-    # If database fails
-    else:
-        print("Database not available. Booking received but not stored.")
-        print("Booking Details:")
-        print(name, phone, date, time, guests)
-
-    return render_template("thankyou.html")
+    except mysql.connector.Error as err:
+        return f"MySQL Error: {err}"
 
 
+# Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
