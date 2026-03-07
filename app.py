@@ -4,7 +4,7 @@ import time
 
 app = Flask(__name__)
 
-# Database connection function
+
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
@@ -22,13 +22,13 @@ def get_db_connection():
         return None
 
 
-# Home Page
+
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# Booking Route
+
 @app.route("/book", methods=["POST"])
 def book():
     name = request.form["name"]
@@ -62,6 +62,6 @@ def book():
         return f"MySQL Error: {err}"
 
 
-# Run Flask App
+
 if __name__ == "__main__":
     app.run(debug=True)
