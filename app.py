@@ -65,7 +65,7 @@ def book():
     cur.close()
     conn.close()
 
-    return "Booking Successful!"
+    return render_template("thankyou.html")
 
 
 if __name__ == '__main__':
