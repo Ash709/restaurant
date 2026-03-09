@@ -6,16 +6,16 @@ app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host=os.environ.get("DB_HOST"),
-        database=os.environ.get("DB_NAME"),
-        user=os.environ.get("DB_USER"),
-        password=os.environ.get("DB_PASSWORD"),
-        port=os.environ.get("DB_PORT")
+        host=os.environ.get("db_host"),
+        database=os.environ.get("db_name"),
+        user=os.environ.get("db_user"),
+        password=os.environ.get("db_password"),
+        port=os.environ.get("db_port")
     )
     return conn
 
 
-# CREATE TABLE AUTOMATICALLY
+
 def create_table():
     conn = get_db_connection()
     cur = conn.cursor()
