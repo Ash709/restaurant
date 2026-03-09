@@ -1,67 +1,72 @@
-from flask import Flask, render_template, request
-import mysql.connector
-import time
+from flask import Flask, request, render_template
+import psycopg2
+import os
 
 app = Flask(__name__)
 
-
 def get_db_connection():
-    try:
-        conn = mysql.connector.connect(
-            host="127.0.0.1",
-            port=3306,
-            user="root",
-            password="ASH@1234562003",
-            database="tastynuts",
-            auth_plugin='mysql_native_password',
-            connection_timeout=5
-        )
-        return conn
-    except mysql.connector.Error as err:
-        print("MySQL Connection Error:", err)
-        return None
+    conn = psycopg2.connect(
+        host=os.environ.get("DB_HOST"),
+        database=os.environ.get("DB_NAME"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        port=os.environ.get("DB_PORT")
+    )
+    return conn
 
 
+# CREATE TABLE AUTOMATICALLY
+def create_table():
+    conn = get_db_connection()
+    cur = conn.cursor()
 
-@app.route("/")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bookings (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100),
+        phone VARCHAR(20),
+        date DATE,
+        time TIME,
+        guests INTEGER
+    );
+    """)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+# Run table creation when app starts
+create_table()
+
+
+@app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template('index.html')
 
 
-
-@app.route("/book", methods=["POST"])
+@app.route('/book', methods=['POST'])
 def book():
-    name = request.form["name"]
-    phone = request.form["phone"]
-    date = request.form["date"]
-    time_slot = request.form["time"]
-    guests = request.form["guests"]
+    name = request.form['name']
+    phone = request.form['phone']
+    date = request.form['date']
+    time = request.form['time']
+    guests = request.form['guests']
 
     conn = get_db_connection()
+    cur = conn.cursor()
 
-    if conn is None:
-        return "Database connection failed. Please try again later."
+    cur.execute(
+        "INSERT INTO bookings (name, phone, date, time, guests) VALUES (%s,%s,%s,%s,%s)",
+        (name, phone, date, time, guests)
+    )
 
-    try:
-        cursor = conn.cursor()
+    conn.commit()
+    cur.close()
+    conn.close()
 
-        query = """
-        INSERT INTO bookings (name, phone, date, time, guests)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-
-        cursor.execute(query, (name, phone, date, time_slot, guests))
-        conn.commit()
-
-        cursor.close()
-        conn.close()
-
-        return render_template("thankyou.html")
-
-    except mysql.connector.Error as err:
-        return f"MySQL Error: {err}"
+    return "Booking Successful!"
 
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
