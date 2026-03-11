@@ -1,13 +1,14 @@
 import mysql.connector
+import os
 
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="ASH@1234562003",
-            database="tastynuts",
-            port=3306
+            host=os.getenv("DB_HOST", "centerbeam.proxy.rlwy.net"),
+            port=int(os.getenv("DB_PORT", 16458)),
+            user=os.getenv("DB_USER", "railway"),
+            password=os.getenv("DB_PASSWORD", "ckzQadVYiVGWFNlKpPRiXrzrVDqPOLDM"),
+            database=os.getenv("DB_NAME", "railway")
         )
         return conn
 
