@@ -8,12 +8,13 @@ app = Flask(__name__)
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            host="mysql.railway.internal",
+            host="127.0.0.1",
             port=3306,
             user="root",
-            password="ckzQadVYiVGWFNlKpPRiXrzrVDqPOLDM",
-            database="railway"
-
+            password="ASH@1234562003",
+            database="tastynuts",
+            auth_plugin='mysql_native_password',
+            connection_timeout=5
         )
         return conn
     except mysql.connector.Error as err:
@@ -62,8 +63,5 @@ def book():
 
 
 
-import os
-
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
