@@ -6,7 +6,7 @@ def get_db_connection():
         conn = mysql.connector.connect(
             host=os.getenv("DB_HOST", "centerbeam.proxy.rlwy.net"),
             port=int(os.getenv("DB_PORT", 16458)),
-            user=os.getenv("DB_USER", "railway"),
+            user=os.getenv("DB_USER", "root"),
             password=os.getenv("DB_PASSWORD", "ckzQadVYiVGWFNlKpPRiXrzrVDqPOLDM"),
             database=os.getenv("DB_NAME", "railway")
         )
