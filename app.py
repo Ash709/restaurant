@@ -1,31 +1,12 @@
 from flask import Flask, render_template, request
-import mysql.connector
-import time
+from db_config import get_db_connection
 
 app = Flask(__name__)
-
-
-def get_db_connection():
-    try:
-        conn = mysql.connector.connect(
-             host="centerbeam.proxy.rlwy.net",
-             port=16458,
-             user="railway",
-             password="ckzQadVYiVGWFNlKpPRiXrzrVDqPOLDM",
-             database="railway"
-)
-        )
-        return conn
-    except mysql.connector.Error as err:
-        print("MySQL Connection Error:", err)
-        return None
-
 
 
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 
 @app.route("/book", methods=["POST"])
@@ -57,9 +38,8 @@ def book():
 
         return render_template("thankyou.html")
 
-    except mysql.connector.Error as err:
+    except Exception as err:
         return f"MySQL Error: {err}"
-
 
 
 if __name__ == "__main__":
