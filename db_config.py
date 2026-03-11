@@ -3,13 +3,14 @@ import mysql.connector
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            host="mysql.railway.internal",
-            port=3306,
+            host="localhost",
             user="root",
-            password="ckzQadVYiVGWFNlKpPRiXrzrVDqPOLDM",
-            database="railway"
+            password="ASH@1234562003",
+            database="tastynuts",
+            port=3306
         )
         return conn
+
     except mysql.connector.Error as err:
-        print("Database Error:", err)
+        print("MySQL Error:", err)
         return None
